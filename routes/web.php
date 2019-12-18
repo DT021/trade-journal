@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
+Route::get('/', 'PagesController@index')->middleware('guest');
 
 //Require email verification before authentication completes
 Auth::routes(['verify' => true]);

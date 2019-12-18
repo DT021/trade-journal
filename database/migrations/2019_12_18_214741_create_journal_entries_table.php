@@ -15,6 +15,8 @@ class CreateJournalEntriesTable extends Migration
     {
         Schema::create('journal_entries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('body');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

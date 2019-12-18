@@ -36,4 +36,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user's journal entries.
+     */ 
+    public function JournalEntries() {
+        return $this->hasMany('App\JournalEntry');
+    }
 }

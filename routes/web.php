@@ -13,9 +13,10 @@
 
 Route::get('/', 'PagesController@index');
 
-Auth::routes();
+//Require email verification before authentication completes
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/journal', 'PagesController@journal')->middleware('auth');
+Route::get('/journal', 'PagesController@journal')->middleware('auth')->middleware('verified');
 

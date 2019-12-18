@@ -17,5 +17,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/journal', 'PagesController@journal');
+Route::get('/journal', 'PagesController@journal')->middleware('auth');
 

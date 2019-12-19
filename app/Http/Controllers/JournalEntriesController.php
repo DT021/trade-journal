@@ -16,7 +16,9 @@ class JournalEntriesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); 
+        //Requires the user to be authenticated and verified to access the journal
+        $this->middleware('auth');
+        $this->middleware('verified'); 
     }
 
     /**
@@ -28,7 +30,7 @@ class JournalEntriesController extends Controller
     {
         $user_id = auth()->user()->id;
         $journal_entries = JournalEntry::where('user_id', $user_id)->paginate(5);
-        return view('pages.journal')->with('journal_entries', $journal_entries);
+        return view('journal.index')->with('journal_entries', $journal_entries);
     }
 
     /**

@@ -27,10 +27,10 @@ class PagesController extends Controller
         return view('pages.index');
     }
 
-    public function journal() 
+    /* public function journal() 
     {
         $user_id = Auth::user()->id;
         $journal_entries = JournalEntry::where('user_id', $user_id)->get();
         return view('pages.journal')->with('journal_entries', $journal_entries);
-    }
+    } */
 }

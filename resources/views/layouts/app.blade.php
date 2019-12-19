@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -26,5 +24,12 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" rel="script" src="{{asset('js/app.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('summary-ckeditor');
+    </script>
 </body>
 </html>

@@ -5,7 +5,8 @@
         <h1>Journal</h1>
         {!! Form::open(['action' => 'JournalEntriesController@store']) !!}
             <div class="form-group">
-                {{Form::textarea('body', '', ['class' => 'form-control'])}}
+                {{Form::textarea('body', '', ['class' => 'form-control', 'id' => 'summary-ckeditor'])}}
+                {{-- <journal-entry-form></journal-entry-form> --}}
             </div>
             {{Form::submit('Create New Entry', ['class'=>'btn btn-primary'])}}
         {!! Form::close() !!}
@@ -13,7 +14,7 @@
             @foreach($journal_entries as $entry)
                 <div class="card mt-2 mb-2">
                     <div class="card-body">
-                        <p class="card-text">{{$entry->body}}</p>
+                        <p class="card-text">{!!$entry->body!!}</p>
                         <small>Written on {{$entry->created_at}}</small>
                     </div>
                 </div>
@@ -22,6 +23,5 @@
         @else
             <p>No posts found.</p>
         @endif
-    </div>
-    
+    </div>  
 @endsection

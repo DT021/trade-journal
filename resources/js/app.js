@@ -8,6 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// Ckeditor dependencies
+import Vue from 'vue';
+import CKEditor from '@ckeditor/ckeditor5-vue';
+Vue.use( CKEditor );
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,7 +24,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('journal-entry-form', require('./components/JournalEntryForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

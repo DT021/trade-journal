@@ -26,8 +26,8 @@ class JournalEntriesController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $journal_entries = JournalEntry::where('user_id', $user_id)->get();
+        $user_id = auth()->user()->id;
+        $journal_entries = JournalEntry::where('user_id', $user_id)->paginate(5);
         return view('pages.journal')->with('journal_entries', $journal_entries);
     }
 
@@ -49,7 +49,17 @@ class JournalEntriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
+
+        // Create journal entry
+        $journal_entry = new JournalEntry;
+        $journal_entry->body = $request->input('body');
+        $journal_entry->user_id = auth()->user()->id;
+        $journal_entry->save();
+
+        return redirect('/journal');
     }
 
     /**

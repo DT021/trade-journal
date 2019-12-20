@@ -10,6 +10,6 @@
         <div class="form-group">
             {{Form::textarea('body', $journal_entry->body, ['class' => 'form-control', 'id' => 'summary-ckeditor'])}}
         </div>
-        {{Form::submit('Create New Entry', ['class'=>'btn btn-primary'])}}
+        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!} 
 @endsection

@@ -116,6 +116,8 @@ class JournalEntriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $journal_entry = JournalEntry::find($id);
+        $journal_entry->delete();
+        return redirect('/journal')->with('success', 'Journal Entry Deleted');
     }
 }

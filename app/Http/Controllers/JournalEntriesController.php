@@ -76,14 +76,15 @@ class JournalEntriesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing a journal entry.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $journal_entry = JournalEntry::find($id);
+        return view('journal.edit')->with('journal_entry', $journal_entry);
     }
 
     /**
@@ -95,7 +96,16 @@ class JournalEntriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
+
+        // Create journal entry
+        $journal_entry = JournalEntry::find($id);
+        $journal_entry->body = $request->input('body');
+        $journal_entry->save();
+
+        return redirect('/journal');
     }
 
     /**

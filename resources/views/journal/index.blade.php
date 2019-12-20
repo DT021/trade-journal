@@ -3,20 +3,16 @@
 @section('content')
     <div class="container">
         <h1>Journal</h1>
-        {!! Form::open(['action' => 'JournalEntriesController@store', 'class' => 'mb-5']) !!}
-            <div class="form-group">
-                {{Form::textarea('body', '', ['class' => 'form-control', 'id' => 'summary-ckeditor'])}}
-                {{-- <journal-entry-form></journal-entry-form> --}}
-            </div>
-            {{Form::submit('Create New Entry', ['class'=>'btn btn-primary'])}}
-        {!! Form::close() !!}
-        <h2>Past Entries</h2>
+        <a href="/journal/create" class="btn btn-primary mb-2">Create New Entry</a>
         @if(count($journal_entries) > 0)
             @foreach($journal_entries as $entry)
                 <div class="card mb-2">
                     <div class="card-body">
                         <p class="card-text">{!!$entry->body!!}</p>
-                        <small>Written on {{$entry->created_at}}</small>
+                        <a href="/journal/edit" class="btn btn-secondary btn-small">Edit</a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Written on {{$entry->created_at}}</small>
                     </div>
                 </div>
             @endforeach

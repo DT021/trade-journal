@@ -34,13 +34,13 @@ class JournalEntriesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new journal entry.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('journal.create');
     }
 
     /**

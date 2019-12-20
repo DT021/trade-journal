@@ -61,7 +61,7 @@ class JournalEntriesController extends Controller
         $journal_entry->user_id = auth()->user()->id;
         $journal_entry->save();
 
-        return redirect('/journal');
+        return redirect('/journal')->with('success', 'Journal Entry Created');
     }
 
     /**
@@ -105,7 +105,7 @@ class JournalEntriesController extends Controller
         $journal_entry->body = $request->input('body');
         $journal_entry->save();
 
-        return redirect('/journal');
+        return redirect('/journal')->with('success', 'Journal Entry Updated');
     }
 
     /**

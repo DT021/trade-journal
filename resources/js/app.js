@@ -25,8 +25,6 @@ Vue.use( CKEditor );
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Handle local component registration later
-Vue.component('journal-entry-form', require('./components/JournalEntryForm.vue').default);
-Vue.component('journal-entry', require('./components/JournalEntry.vue').default);
 Vue.component('journal-entries', require('./components/JournalEntries.vue').default);
 
 /**

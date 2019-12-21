@@ -18,3 +18,7 @@ Auth::routes(['verify' => true]);
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::resource('journal', 'JournalEntriesController');
+
+Route::resource('trade', 'TradesController');
+
+Route::get('/trades/import', 'TradesController@import');

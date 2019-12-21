@@ -47,7 +47,22 @@ class TradesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('csv')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('csv')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('csv')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload File
+            $path = $request->file('csv')->storeAs('public/csvs', $fileNameToStore);
+
+            return redirect('/');
+        } else {
+            return "No file";
+        }
     }
 
     /**

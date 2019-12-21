@@ -6,20 +6,25 @@
   
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mx-2">
             <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
         </ul>
 
-      <ul class="navbar-nav">
+      <ul class="navbar-nav mx-2">
         <li class="nav-item"><a class="nav-link" href="/journal">Journal</a></li>
       </ul>
 
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="/trades/import">Import Trades</a></li>
+      <ul class="navbar-nav mx-2">
+        <li class="nav-item"><a class="nav-link" href="/trades">Trades</a></li>
       </ul>
+
+      
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mx-2">
+            <li class="nav-item"><a class="nav-link" href="/trades/import">Import Trades</a></li>
+        </ul>
         <!-- Authentication Links -->
         @guest
             <li class="nav-item">

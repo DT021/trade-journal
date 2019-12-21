@@ -5,7 +5,7 @@
 
 {!! Form::open(['action' => 'TradesController@store',  'files' => true]) !!}
     <div class="form-group">
-      {{Form::file('csv')}}
+      {{Form::file('file')}}
     </div>
     {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
 {!! Form::close() !!}

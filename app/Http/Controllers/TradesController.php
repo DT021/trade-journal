@@ -26,7 +26,7 @@ class TradesController extends Controller
      */
     public function index()
     {
-        //
+        return view('trades.index');
     }
 
     /**
@@ -47,19 +47,51 @@ class TradesController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('csv')) {
-            // Get filename with the extension
-            $filenameWithExt = $request->file('csv')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('csv')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload File
-            $path = $request->file('csv')->storeAs('public/csvs', $fileNameToStore);
+        $this->validate($request, [
+            'file' => 'required'
+        ]);
 
-            return redirect('/');
+        if ($request->hasFile('file')) {
+            // Get path to uploaded CSV file
+            $path = $request->file('file')->getRealPath();
+
+            // Create associative array from CSV
+            $rows   = array_map('str_getcsv', file($path));
+            $header = array_shift($rows);
+            $records = array();
+            foreach($rows as $row) {
+                $records[] = array_combine($header, $row);
+            }
+
+            // Counter for success message
+            $num_trades = 0;
+
+            // Loop through the file
+            foreach($records as $record) {
+                $num_trades++;
+
+                // Create new trade
+                // TODO: Expand for other brokers besides TastyWorks
+                $trade = new Trade;
+                $trade->user_id = auth()->user()->id;
+
+                // Format date for MySQL
+                $trade->executed_at = join(' ', explode('T', substr($record['Date'], 0, -5)));
+                
+                $trade->action = $record['Action'];
+                $trade->symbol = $record['Underlying Symbol'];
+                $trade->instrument_type = $record['Instrument Type'];
+                $trade->value = floatval($record['Value']);
+                $trade->quantity = intval($record['Quantity']);
+                $trade->commissions = floatval($record['Commissions']);
+                $trade->fees = floatval($record['Fees']);
+                $trade->expiration = $record['Expiration Date'];
+                $trade->strike_price = floatval($record['Strike Price']);
+                $trade->call_or_put = $record['Call or Put'];
+                $trade->save();
+            };
+            
+            return redirect('/trades')->with('success', $num_trades.' Trades Were Imported');
         } else {
             return "No file";
         }

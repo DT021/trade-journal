@@ -19,7 +19,7 @@ class CreateTradesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             // Date and time the trade was executed
-            $table->dateTime('date');
+            $table->dateTime('executed_at');
 
             // Type of trade (buy to open, buy to close, sell to open, sell to close)
             $table->string('action');
@@ -27,7 +27,7 @@ class CreateTradesTable extends Migration
             // Ticker symbol
             $table->string('symbol');
 
-            // Type of instrument trade (stock, option, future, etc)
+            // Type of instrument (stock, option, future, etc)
             $table->string('instrument_type');
 
             // Total $ value of trade
@@ -50,6 +50,8 @@ class CreateTradesTable extends Migration
 
             // Whether the option was a call or put
             $table->string('call_or_put');
+
+            $table->timestamps();
 
         });
     }

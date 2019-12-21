@@ -82,8 +82,18 @@ class JournalEntriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $journal_entry = JournalEntry::find($id);
+    {   
+        $journal_entry = JournalEntry::findOrFail($id);
+        
+        if (auth()->user()->cant('update', $journal_entry)) {
+            return redirect('/journal')->with('error', 'Unauthorized Page');
+        }
+
+        /* // Check for correct user
+        if(auth()->user()->id !== $journal_entry->user_id){
+            return redirect('/journal')->with('error', 'Unauthorized Page');
+        } */
+
         return view('journal.edit')->with('journal_entry', $journal_entry);
     }
 
@@ -116,7 +126,7 @@ class JournalEntriesController extends Controller
      */
     public function destroy($id)
     {
-        $journal_entry = JournalEntry::find($id);
+        $journal_entry = JournalEntry::findOrFail($id);
         $journal_entry->delete();
         return redirect('/journal')->with('success', 'Journal Entry Deleted');
     }

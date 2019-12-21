@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 class TradesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        //Requires the user to be authenticated and verified to access trades
+        $this->middleware('auth');
+        $this->middleware('verified'); 
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

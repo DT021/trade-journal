@@ -19,6 +19,6 @@ Route::get('/dashboard', 'DashboardController@index');
 
 Route::resource('journal', 'JournalEntriesController');
 
-Route::resource('trade', 'TradesController');
 
 Route::get('/trades/import', 'TradesController@import');
+Route::resource('trades', 'TradesController');

@@ -2,10 +2,12 @@
 
 @section('content')
 <h1>Import Trades</h1>
-<form>
+
+{!! Form::open(['action' => 'TradesController@store',  'files' => true]) !!}
     <div class="form-group">
-      <label for="exampleFormControlFile1">Upload File</label>
-      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      {{Form::file('csv')}}
     </div>
-</form>
+    {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+{!! Form::close() !!}
+
 @endsection

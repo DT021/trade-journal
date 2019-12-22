@@ -20,13 +20,65 @@ class TradesController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display all of the user's trades.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('trades.index');
+        // Get all trade executions for the user
+        $executions = Trade::where('user_id', auth()->user()->id)->orderBy('executed_at')->get();
+
+        // Group the executions
+        $groups = $this->groupTrades($executions);
+
+        //return view('trades.index')->with('groups', $groups);
+
+        return $groups;
+    }
+
+    /**
+     * Groups trade executions for displaying to the user.
+     * 
+     * @param \Illuminate\Support\Collection
+     * @return 2-dimensional array that represents trade groupings
+     */
+    private function groupTrades($executions)
+    {
+        $result = array();
+
+        // Loop through all executions while keeping track of quantity per symbol in order to create groupings
+        $quantities = array();      // $quantities[symbol] = quantity
+        $groups = array();      // $groups[symbol] = [executions]
+        foreach($executions as $exec) {
+            $symbol = $exec->symbol;
+            $quantity = $exec->quantity;
+
+            // If action was a sell, make quantity negative
+            if (strpos($exec->action, 'SELL') !== false) {
+                $quantity *= -1;
+            }
+
+
+            if (array_key_exists($symbol, $quantities) && array_key_exists($symbol, $groups)) {
+                $quantities[$symbol] += $quantity;
+                array_push($groups[$symbol], $exec);
+                
+                // If quantity is 0, then trade is closed. Add to result.
+                if ($quantities[$symbol] == 0) {
+                    array_push($result,  $groups[$symbol]);
+                    // Remove elements
+                    unset($quantities[$symbol]);
+                    unset($groups[$symbol]);
+                }
+
+            } else {
+                $quantities[$symbol] = $quantity;
+                $groups[$symbol] = array($exec);
+            }
+        }
+
+        return $result;
     }
 
     /**

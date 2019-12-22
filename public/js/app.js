@@ -1917,19 +1917,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    meta: Object
+    entries: Array
   },
   data: function data() {
     return {
-      // Contains all journal entries for the user
-      entries: this.meta.data,
       // Post ID for delete confirmation modal
       postIdToDelete: "",
       //CSRF token
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content")
     };
   },
-  mounted: function mounted() {//console.log(this.meta);
+  mounted: function mounted() {//console.log(this.entries);
   },
   methods: {}
 });

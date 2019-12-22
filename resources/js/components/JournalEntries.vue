@@ -62,14 +62,11 @@
 <script>
 export default {
     props: {
-        meta: Object
+        entries: Array
     },
 
     data() {
         return {
-            // Contains all journal entries for the user
-            entries: this.meta.data,
-
             // Post ID for delete confirmation modal
             postIdToDelete: "",
 
@@ -81,7 +78,7 @@ export default {
     },
 
     mounted: function() {
-        //console.log(this.meta);
+        //console.log(this.entries);
     },
 
     methods: {}

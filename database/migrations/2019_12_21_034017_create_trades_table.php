@@ -36,6 +36,9 @@ class CreateTradesTable extends Migration
             // Quantity traded
             $table->integer('quantity');
 
+            //Average Price per contract
+            $table->float('avg_price');
+
             // Broker commissions
             $table->float('commissions');
 

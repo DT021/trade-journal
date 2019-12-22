@@ -132,17 +132,18 @@ class TradesController extends Controller
                 $trade->action = $record['Action'];
                 $trade->symbol = $record['Underlying Symbol'];
                 $trade->instrument_type = $record['Instrument Type'];
-                $trade->value = floatval($record['Value']);
-                $trade->quantity = intval($record['Quantity']);
-                $trade->commissions = floatval($record['Commissions']);
-                $trade->fees = floatval($record['Fees']);
+                $trade->value = floatval(str_replace(',', '', $record['Value']));
+                $trade->quantity = intval(str_replace(',', '', $record['Quantity']));
+                $trade->avg_price = floatval(str_replace(',', '', $record['Average Price']));
+                $trade->commissions = floatval(str_replace(',', '', $record['Commissions']));
+                $trade->fees = floatval(str_replace(',', '', $record['Fees']));
                 $trade->expiration = $record['Expiration Date'];
-                $trade->strike_price = floatval($record['Strike Price']);
+                $trade->strike_price = floatval(str_replace(',', '', $record['Strike Price']));
                 $trade->call_or_put = $record['Call or Put'];
                 $trade->save();
             };
             
-            return redirect('/trades')->with('success', $num_trades.' Trades Were Imported');
+            return redirect('/trades')->with('success', $num_trades.' Trades Executions Were Imported');
         } else {
             return "No file";
         }

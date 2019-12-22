@@ -29,7 +29,7 @@ class JournalEntriesController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $journal_entries = JournalEntry::where('user_id', $user_id)->paginate(5);
+        $journal_entries = JournalEntry::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(5);
         return view('journal.index')->with('journal_entries', $journal_entries);
     }
 

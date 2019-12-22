@@ -21,11 +21,11 @@ Vue.use( CKEditor );
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Handle local component registration later
-Vue.component('journal-entries', require('./components/JournalEntries.vue').default);
+//Vue.component('journal-entries', require('./components/JournalEntries.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

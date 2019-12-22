@@ -32,9 +32,7 @@ class TradesController extends Controller
         // Group the executions
         $groups = $this->groupTrades($executions);
 
-        //return view('trades.index')->with('groups', $groups);
-
-        return $groups;
+        return view('trades.index')->with('groups', $groups);
     }
 
     /**
@@ -43,6 +41,7 @@ class TradesController extends Controller
      * @param \Illuminate\Support\Collection
      * @return 2-dimensional array that represents trade groupings
      */
+    //TODO: Handle open trades
     private function groupTrades($executions)
     {
         $result = array();

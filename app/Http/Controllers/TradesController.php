@@ -16,7 +16,7 @@ class TradesController extends Controller
     {
         //Requires the user to be authenticated and verified to access trades
         $this->middleware('auth');
-        $this->middleware('verified'); 
+        $this->middleware('verified');
     }
 
     /**
@@ -49,7 +49,7 @@ class TradesController extends Controller
         // Loop through all executions while keeping track of quantity per symbol in order to create groupings
         $quantities = array();      // $quantities[symbol] = quantity
         $groups = array();      // $groups[symbol] = [executions]
-        foreach($executions as $exec) {
+        foreach ($executions as $exec) {
             $symbol = $exec->symbol;
             $quantity = $exec->quantity;
 
@@ -62,7 +62,7 @@ class TradesController extends Controller
             if (array_key_exists($symbol, $quantities) && array_key_exists($symbol, $groups)) {
                 $quantities[$symbol] += $quantity;
                 array_push($groups[$symbol], $exec);
-                
+
                 // If quantity is 0, then trade is closed. Add to result.
                 if ($quantities[$symbol] == 0) {
                     array_push($result,  $groups[$symbol]);
@@ -70,7 +70,6 @@ class TradesController extends Controller
                     unset($quantities[$symbol]);
                     unset($groups[$symbol]);
                 }
-
             } else {
                 $quantities[$symbol] = $quantity;
                 $groups[$symbol] = array($exec);
@@ -102,51 +101,47 @@ class TradesController extends Controller
             'file' => 'required'
         ]);
 
-        if ($request->hasFile('file')) {
-            // Get path to uploaded CSV file
-            $path = $request->file('file')->getRealPath();
+        // Get path to uploaded CSV file
+        $path = $request->file('file')->getRealPath();
 
-            // Create associative array from CSV
-            $rows   = array_map('str_getcsv', file($path));
-            $header = array_shift($rows);
-            $records = array();
-            foreach($rows as $row) {
-                $records[] = array_combine($header, $row);
-            }
-
-            // Counter for success message
-            $num_trades = 0;
-
-            // Loop through the file
-            foreach($records as $record) {
-                $num_trades++;
-
-                // Create new trade
-                // TODO: Expand for other brokers besides TastyWorks
-                $trade = new Trade;
-                $trade->user_id = auth()->user()->id;
-
-                // Format date for MySQL
-                $trade->executed_at = join(' ', explode('T', substr($record['Date'], 0, -5)));
-                
-                $trade->action = $record['Action'];
-                $trade->symbol = $record['Underlying Symbol'];
-                $trade->instrument_type = $record['Instrument Type'];
-                $trade->value = floatval(str_replace(',', '', $record['Value']));
-                $trade->quantity = intval(str_replace(',', '', $record['Quantity']));
-                $trade->avg_price = floatval(str_replace(',', '', $record['Average Price']));
-                $trade->commissions = floatval(str_replace(',', '', $record['Commissions']));
-                $trade->fees = floatval(str_replace(',', '', $record['Fees']));
-                $trade->expiration = $record['Expiration Date'];
-                $trade->strike_price = floatval(str_replace(',', '', $record['Strike Price']));
-                $trade->call_or_put = $record['Call or Put'];
-                $trade->save();
-            };
-            
-            return redirect('/trades')->with('success', $num_trades.' Trades Executions Were Imported');
-        } else {
-            return "No file";
+        // Create associative array from CSV
+        $rows   = array_map('str_getcsv', file($path));
+        $header = array_shift($rows);
+        $records = array();
+        foreach ($rows as $row) {
+            $records[] = array_combine($header, $row);
         }
+
+        // Counter for success message
+        $num_trades = 0;
+
+        // Loop through the file
+        foreach ($records as $record) {
+            $num_trades++;
+
+            // Create new trade
+            // TODO: Expand for other brokers besides TastyWorks
+            $trade = new Trade;
+            $trade->user_id = auth()->user()->id;
+
+            // Format date for MySQL
+            $trade->executed_at = join(' ', explode('T', substr($record['Date'], 0, -5)));
+
+            $trade->action = $record['Action'];
+            $trade->symbol = $record['Underlying Symbol'];
+            $trade->instrument_type = $record['Instrument Type'];
+            $trade->value = floatval(str_replace(',', '', $record['Value']));
+            $trade->quantity = intval(str_replace(',', '', $record['Quantity']));
+            $trade->avg_price = floatval(str_replace(',', '', $record['Average Price']));
+            $trade->commissions = floatval(str_replace(',', '', $record['Commissions']));
+            $trade->fees = floatval(str_replace(',', '', $record['Fees']));
+            $trade->expiration = $record['Expiration Date'];
+            $trade->strike_price = floatval(str_replace(',', '', $record['Strike Price']));
+            $trade->call_or_put = $record['Call or Put'];
+            $trade->save();
+        };
+
+        return redirect('/trades')->with('success', $num_trades . ' Trades Executions Were Imported');
     }
 
     /**

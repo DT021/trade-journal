@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
+/* Route::get('/', 'PagesController@index');
 
 Auth::routes(['verify' => true]);
 
@@ -21,4 +21,7 @@ Route::resource('journal', 'JournalEntriesController');
 
 
 Route::get('/trades/import', 'TradesController@import');
-Route::resource('trades', 'TradesController');
+Route::resource('trades', 'TradesController'); */
+
+// Redirects all requests to Vue router
+Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');

@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// Route info for Vue Router
+import Routes from '../js/routes.js'
+
 // Ckeditor dependencies
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue';
@@ -21,11 +24,13 @@ Vue.use( CKEditor );
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+/* const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default)) */
 
 // Handle local component registration later
 //Vue.component('journal-entries', require('./components/JournalEntries.vue').default);
+
+import App from '../js/components/App'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,4 +40,6 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 const app = new Vue({
     el: '#app',
+    router: Routes,
+    render: h => h(App)
 });

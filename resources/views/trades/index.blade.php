@@ -14,14 +14,18 @@
                     <th scope="col">P/L</th>
                 </tr>
             </thead>
-        @foreach ($groups as $group)            
+        @foreach ($groups as $group)
+            @php
+                $vals = TradesHelper::getCalculatedVals($group);
+            @endphp            
             <tr>
                 <td>{{$group[0]->executed_at}}</td>
                 <td>{{end($group)->executed_at}}</td>
                 <td>{{$group[0]->symbol}}</td>
-                <td>{{avgEntryPrice($group)}}</td>
-                <td>{{avgExitPrice($group)}}</td>
-
+                <td>{{number_format($vals['avg_entry_price'], 2)}}</td>
+                <td>{{number_format($vals['avg_exit_price'], 2)}}</td>
+                <td>{{$vals['volume']}}</td>
+                <td>{{number_format($vals['profit_loss'], 2)}}</td>
             </tr>
         @endforeach
         </table>

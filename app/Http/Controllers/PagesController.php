@@ -21,9 +21,9 @@ class PagesController extends Controller
 
     public function index() 
     {
-        // If the user is authenticated, redirect to /journal
+        // If the user is authenticated, redirect to dashboard
         if (auth()->check()) {
-            return redirect('/journal');
+            return redirect('/dashboard');
         }
         return view('pages.index');
     }

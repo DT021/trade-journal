@@ -33,9 +33,6 @@
         }
     },
     "autoload": {
-        "files": [
-            "app/Helpers/TradeHelpers.php"
-        ],
         "psr-4": {
             "App\\": "app/"
         },

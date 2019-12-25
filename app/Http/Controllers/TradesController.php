@@ -31,7 +31,7 @@ class TradesController extends Controller
         $executions = auth()->user()->trades()->orderBy('executed_at')->get();
 
         // Group the executions
-        $groups = TradesHelper::groupTrades($executions);
+        $groups = TradesHelper::groupTrades($executions);   
 
         return view('trades.index')->with('groups', $groups);
     }

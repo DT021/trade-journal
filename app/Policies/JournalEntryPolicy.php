@@ -65,7 +65,7 @@ class JournalEntryPolicy
      */
     public function delete(User $user, JournalEntry $journalEntry)
     {
-        //
+        return $user->id === $journalEntry->user_id;
     }
 
     /**

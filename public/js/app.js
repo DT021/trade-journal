@@ -49752,11 +49752,7 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // Ckeditor dependencies
-
-CKEDITOR.replace('journal-create-form', {
-  customConfig: '/custom/ckeditor_config.js'
-});
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

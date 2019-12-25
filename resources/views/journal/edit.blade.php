@@ -8,7 +8,7 @@
         @method('PUT')  
         
         <div class="form-group">
-            {{Form::textarea('body', $journal_entry->body, ['class' => 'form-control', 'id' => 'summary-ckeditor'])}}
+            {{Form::textarea('body', $journal_entry->body, ['class' => 'form-control', 'id' => 'ckeditor'])}}
         </div>
         {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!} 

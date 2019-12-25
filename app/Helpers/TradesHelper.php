@@ -8,16 +8,16 @@ class TradesHelper
      * Groups trade executions for displaying to the user.
      * 
      * @param \Illuminate\Support\Collection
-     * @return 2-dimensional array that represents trade execution groupings
+     * @return array
      */
     //TODO: Handle open trades
     public static function groupTrades($executions)
     {
-        $result = array();
+        $groups = array();
 
         // Loop through all executions while keeping track of quantity per symbol in order to create groupings
-        $groups = array();      // $groups[symbol] = [execution1, executions2, ...]
-        $quantities = array();
+        $executionsBySymbol = array();
+        $quantitiesBySymbol = array();
         foreach ($executions as $exec) {
             $symbol = $exec->symbol;
             $quantity = $exec->quantity;
@@ -28,27 +28,27 @@ class TradesHelper
             }
 
 
-            if (array_key_exists($symbol, $quantities) && array_key_exists($symbol, $groups)) {
-                $quantities[$symbol] += $quantity;
-                array_push($groups[$symbol], $exec);
+            if (array_key_exists($symbol, $quantitiesBySymbol) && array_key_exists($symbol, $executionsBySymbol)) {
+                $quantitiesBySymbol[$symbol] += $quantity;
+                array_push($executionsBySymbol[$symbol], $exec);
 
                 // If quantity is 0, then trade is closed.
-                if ($quantities[$symbol] == 0) {
+                if ($quantitiesBySymbol[$symbol] == 0) {
 
                     // Add to result
-                    array_push($result,  $groups[$symbol]);
+                    array_push($groups,  $executionsBySymbol[$symbol]);
 
                     // Remove symbol from arrays
-                    unset($quantities[$symbol]);
-                    unset($groups[$symbol]);
+                    unset($quantitiesBySymbol[$symbol]);
+                    unset($executionsBySymbol[$symbol]);
                 }
             } else {
-                $quantities[$symbol] = $quantity;
-                $groups[$symbol] = array($exec);
+                $quantitiesBySymbol[$symbol] = $quantity;
+                $executionsBySymbol[$symbol] = array($exec);
             }
         }
 
-        return $result;
+        return $groups;
     }
 
     /**

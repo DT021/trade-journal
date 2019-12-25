@@ -9,9 +9,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 // Ckeditor dependencies
-import Vue from 'vue';
-import CKEditor from '@ckeditor/ckeditor5-vue';
-Vue.use( CKEditor );
+CKEDITOR.replace('journal-create-form', {
+    customConfig: '/custom/ckeditor_config.js'
+}); 
 
 /**
  * The following block of code may be used to automatically register your

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +16,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
+
 <body>
     <div id="app">
         @include('inc.navbar')
@@ -26,14 +29,17 @@
             </div>
         </main>
     </div>
-
-    <!-- Scripts -->
-    <script src="{{asset('js/app.js')}}"></script>
-    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
-    <script defer>
-        CKEDITOR.replace('summary-ckeditor',{
-            customConfig: '/custom/ckeditor_config.js'
-        });
-    </script>
 </body>
+
+<!-- Scripts -->
+<script src="{{asset('js/app.js')}}"></script>
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<script>
+    if (document.getElementById('ckeditor') != null) {
+        CKEDITOR.replace('ckeditor', {
+            customConfig: '/custom/ckeditor_config.js'
+        }); 
+    }
+</script>
+
 </html>

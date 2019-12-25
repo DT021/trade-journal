@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($exception instanceof ModelNotFoundException) {
-            return redirect('/journal')->with('error', 'Page Not Found ' . $request->url());
+            return redirect('/journal')->with('error', "Page Not Found " . $request->url());
         }
 
         return parent::render($request, $exception);

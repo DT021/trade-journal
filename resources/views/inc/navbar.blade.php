@@ -1,49 +1,58 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="/">{{config('app.name')}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-        <ul class="navbar-nav mx-2">
-            <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-        </ul>
+        <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ml-auto">
 
-      <ul class="navbar-nav mx-2">
-        <li class="nav-item"><a class="nav-link" href="/journal">Journal</a></li>
-      </ul>
+            <ul class="navbar-nav mx-2">
+                <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+            </ul>
 
-      <ul class="navbar-nav mx-2">
-        <li class="nav-item"><a class="nav-link" href="/trades">Trades</a></li>
-      </ul>
+            <ul class="navbar-nav mx-2">
+                <li class="nav-item"><a class="nav-link" href="/journal">Journal</a></li>
+            </ul>
 
-      
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Trades <span class="caret"></span>
+                </a>
+            </li>
 
-      <!-- Right Side Of Navbar -->
-      <ul class="navbar-nav ml-auto">
-        <ul class="navbar-nav mx-2">
-            <li class="nav-item"><a class="nav-link" href="/trades/import">Import Trades</a></li>
-        </ul>
-        <!-- Authentication Links -->
-        @guest
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/trades">
+                    View All
+                </a>
+
+                <a href="/trades/import" class="dropdown-item">
+                    Import
+                </a>
+            </div>
+            <!-- Authentication Links -->
+            @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
             </li>
             @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </li>
             @endif
-        @else
+            @else
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
@@ -53,8 +62,8 @@
                     </form>
                 </div>
             </li>
-        @endguest
-    </ul>
+            @endguest
+        </ul>
     </div>
 </nav>
 <br />

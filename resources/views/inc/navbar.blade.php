@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
     <a class="navbar-brand" href="/">{{config('app.name')}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-        <!-- Right Side Of Navbar -->
-        <ul class="navbar-nav ml-auto">
-
+    <div class="collapse navbar-collapse" id="navbar">
+        <!-- Left side of navbar -->
+        <div class="navbar-nav">
             <ul class="navbar-nav mx-2">
                 <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
             </ul>
@@ -18,22 +18,28 @@
                 <li class="nav-item"><a class="nav-link" href="/journal">Journal</a></li>
             </ul>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown mx-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Trades <span class="caret"></span>
                 </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/trades">
+                        View
+                    </a>
+
+                    <a class="dropdown-item" href="/trades/import">
+                        Import
+                    </a>
+                </div>
             </li>
+        </div>
 
-            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/trades">
-                    View All
-                </a>
 
-                <a href="/trades/import" class="dropdown-item">
-                    Import
-                </a>
-            </div>
+        <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ml-auto">
+
             <!-- Authentication Links -->
             @guest
             <li class="nav-item">

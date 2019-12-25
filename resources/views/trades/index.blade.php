@@ -2,7 +2,7 @@
 
 @section('content')
     @if(count($groups) > 0)
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm datatable">
             <thead>
                 <tr>
                     <th scope="col">Entered At</th>

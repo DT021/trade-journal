@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -228,6 +229,9 @@ return [
 
         //Helpers
         'TradesHelper' => App\Helpers\TradesHelper::class,
+
+        // Datatables
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
 
     ],

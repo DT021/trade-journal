@@ -16,7 +16,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -40,6 +39,12 @@
             customConfig: '/custom/ckeditor_config.js'
         }); 
     }
+</script>
+
+<script>
+    $(document).ready( function () {
+        $('.datatable').DataTable();
+    });
 </script>
 
 </html>

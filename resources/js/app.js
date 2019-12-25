@@ -4,9 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+ // Bootstrap
 require('./bootstrap');
 
+// Vue
 window.Vue = require('vue');
+
+// Datatables
+require( 'datatables.net-bs4' );
 
 /**
  * The following block of code may be used to automatically register your

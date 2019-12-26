@@ -22,4 +22,8 @@ class Trade extends Model
     {
         return $this->hasMany(Execution::class);
     }
+
+    /* public function getExecutionsAttribute() {
+        return $this->executions->orderBy('executed_at');
+    } */
 }

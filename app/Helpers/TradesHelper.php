@@ -53,27 +53,30 @@ class TradesHelper
     }
 
     /**
-     * Calculates average entry price, average exit price, and volume for a group of trades
+     * Returns an associative array of all column values need for displaying a trade.
      * 
      * @param array
      * @return array
      */
-    public static function getCalculatedVals($group)
+    public static function getTradeValues($trade)
     {
+        // Get all executions associated with a trade
+        $executions = $trade->executions()->orderBy('executed_at')->get();
+
         $total_entry_value = 0;
         $total_exit_value = 0;
         $total_quantity = 0;
-        foreach ($group as $item) {
+        foreach ($executions as $execution) {
             // If action contains 'OPEN', it is an entry
-            if (strpos($item->action, 'OPEN') !== false) {
-                $total_entry_value -= $item->value;
-                $total_quantity += $item->quantity;
+            if (strpos($execution->action, 'OPEN') !== false) {
+                $total_entry_value -= $execution->value;
+                $total_quantity += $execution->quantity;
             }
 
             // If action contains 'CLOSE;, it is an EXIT
-            if (strpos($item->action, 'CLOSE') !== false) {
-                $total_exit_value += $item->value;
-                $total_quantity += $item->quantity;
+            if (strpos($execution->action, 'CLOSE') !== false) {
+                $total_exit_value += $execution->value;
+                $total_quantity += $execution->quantity;
             }
         }
 
@@ -83,6 +86,9 @@ class TradesHelper
         $profit_loss = ($avg_exit_price - $avg_entry_price) * $volume;
 
         return [
+            'symbol' => $executions->first()->symbol,
+            'entered_at' => $executions->first()->executed_at,
+            'exited_at' => $executions->last()->executed_at,
             'volume' => $volume, 
             'avg_entry_price' => $avg_entry_price,
             'avg_exit_price' => $avg_exit_price,

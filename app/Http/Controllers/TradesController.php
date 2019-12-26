@@ -28,15 +28,9 @@ class TradesController extends Controller
      */
     public function index()
     {
-        // Get all trade executions for the user
-        $trades = auth()->user()->trades()->get();
-        
+        $trades = auth()->user()->trades;
 
-        // Group the executions
-        //$groups = TradesHelper::groupTrades($executions);
-
-        //return view('trades.index')->with('groups', $groups);
-        return $trades;
+        return view('trades.index')->with('trades', $trades);
     }
 
 
@@ -114,6 +108,7 @@ class TradesController extends Controller
             $trade->save();
             foreach($group as $execution) {
                 $execution->trade()->associate($trade);
+                $execution->save();
             }
         }
 

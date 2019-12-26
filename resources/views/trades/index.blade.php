@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(count($groups) > 0)
+    @if(count($trades) > 0)
         <table class="table table-striped table-sm datatable">
             <thead>
                 <tr>
@@ -14,14 +14,14 @@
                     <th scope="col">P/L</th>
                 </tr>
             </thead>
-        @foreach ($groups as $group)
+        @foreach ($trades as $trade)
             @php
-                //$vals = TradesHelper::getCalculatedVals($group);
+                $vals = TradesHelper::getTradeValues($trade);
             @endphp            
             <tr>
-                <td>{{$group[0]->executed_at}}</td>
-                <td>{{end($group)->executed_at}}</td>
-                <td>{{$group[0]->symbol}}</td>
+                <td>{{$vals['entered_at']}}</td>
+                <td>{{$vals['exited_at']}}</td>
+                <td>{{$vals['symbol']}}</td>
                 <td>{{number_format($vals['avg_entry_price'], 2)}}</td>
                 <td>{{number_format($vals['avg_exit_price'], 2)}}</td>
                 <td>{{$vals['volume']}}</td>

@@ -21,4 +21,5 @@ class JournalEntry extends Model
     {
         return $this->hasMany(Trade::class);
     }
+
 }

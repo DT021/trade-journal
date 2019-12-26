@@ -11,7 +11,7 @@ class JournalEntry extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -19,6 +19,6 @@ class JournalEntry extends Model
      */
     public function trades()
     {
-        return $this->hasMany('App\Trade');
+        return $this->hasMany(Trade::class);
     }
 }

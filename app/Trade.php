@@ -12,7 +12,7 @@ class Trade extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -20,6 +20,6 @@ class Trade extends Model
      */
     public function executions()
     {
-        return $this->hasMany('App\Exectuion');
+        return $this->hasMany(Execution::class);
     }
 }

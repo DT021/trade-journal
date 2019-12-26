@@ -11,7 +11,7 @@ class Execution extends Model
      */
     public function trade()
     {
-        return $this->belongsTo('App\Trade');
+        return $this->belongsTo(Trade::class);
     }
     
     /**

@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function journal_entries()
     {
-        return $this->hasMany('App\JournalEntry');
+        return $this->hasMany(JournalEntry::class);
     }
 
     /**
@@ -50,6 +50,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function trades()
     {
-        return $this->hasMany('App\Trade');
+        return $this->hasMany(Trade::class);
     }
 }

@@ -9,7 +9,16 @@ class JournalEntry extends Model
     /**
      * Get the user who owns this entry
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the trades associated with this journal entry
+     */
+    public function trades()
+    {
+        return $this->hasMany('App\Trade');
     }
 }

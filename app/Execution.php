@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Execution extends Model
 {
     /**
+     * Get the trade that this execution belongs to.
+     */
+    public function trade()
+    {
+        return $this->belongsTo('App\Trade');
+    }
+    
+    /**
      * Mutator to format the expiration column from broker CSVs correctly.
      */
     public function setExpirationAttribute($value)

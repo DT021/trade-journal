@@ -15,9 +15,9 @@ class Trade extends Model
    }
 
    /**
-    * Mutator to format the expiration column from broker CSVs correctly.
+    * Get the executions associated with this trade.
     */
-    public function setExpirationAttribute($value) {
-        $this->attributes['expiration'] = date("Y-m-d", strtotime($value));
+    public function executions() {
+        return $this->hasMany('App\Exectuion');
     }
 }

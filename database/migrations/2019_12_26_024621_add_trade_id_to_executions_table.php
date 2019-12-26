@@ -16,7 +16,6 @@ class AddTradeIdToExecutionsTable extends Migration
         Schema::table('executions', function (Blueprint $table) {
             $table->unsignedBigInteger('trade_id');
             $table->foreign('trade_id')->references('id')->on('trades');
-
         });
     }
 

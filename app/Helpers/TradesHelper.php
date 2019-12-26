@@ -11,6 +11,7 @@ class TradesHelper
      * @return array
      */
     //TODO: Handle open trades
+    // TODO: Refactor function name
     public static function groupTrades($executions)
     {
         $groups = array();

@@ -57,7 +57,7 @@ class JournalEntriesController extends Controller
         // Create journal entry
         $journal_entry = new JournalEntry;
         $journal_entry->body = $request->input('body');
-        $journal_entry->user_id = auth()->user()->id;
+        $journal_entry->user()->associate(auth()->user());
         $journal_entry->save();
 
         return redirect('/journal')->with('success', 'Journal Entry Created');

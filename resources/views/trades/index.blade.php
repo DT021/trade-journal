@@ -16,7 +16,7 @@
             </thead>
         @foreach ($groups as $group)
             @php
-                $vals = TradesHelper::getCalculatedVals($group);
+                //$vals = TradesHelper::getCalculatedVals($group);
             @endphp            
             <tr>
                 <td>{{$group[0]->executed_at}}</td>

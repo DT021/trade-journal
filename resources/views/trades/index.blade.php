@@ -22,10 +22,10 @@
                 <td>{{$vals['entered_at']}}</td>
                 <td>{{$vals['exited_at']}}</td>
                 <td>{{$vals['symbol']}}</td>
-                <td>{{number_format($vals['avg_entry_price'], 2)}}</td>
-                <td>{{number_format($vals['avg_exit_price'], 2)}}</td>
+                <td>{{'$' . number_format($vals['avg_entry_price'], 2)}}</td>
+                <td>{{'$' . number_format($vals['avg_exit_price'], 2)}}</td>
                 <td>{{$vals['volume']}}</td>
-                <td>{{number_format($vals['profit_loss'], 2)}}</td>
+                <td>{{'$' . number_format($vals['profit_loss'], 2)}}</td>
             </tr>
         @endforeach
         </table>
